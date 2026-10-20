@@ -3,3 +3,7 @@ target/
 dbt_packages/
 logs/
 .env
+venv/
+*.duckdb
+__pycache__/
+.DS_Store
