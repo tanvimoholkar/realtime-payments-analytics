@@ -1,0 +1,48 @@
+version: 2
+
+models:
+  - name: stg_payments
+    description: "Staging model for payments: cleaned and typed columns from raw_payments"
+    columns:
+      - name: payment_id
+        description: "Primary key for the staging model"
+        data_tests:
+          - not_null
+          - unique
+
+      - name: merchant_id
+        description: "The ID of the merchant associated with the payment"
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_merchants')
+                field: merchant_id
+
+      - name: status
+        description: "The status of the payment (completed, pending, failed, refunded)"
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ["completed", "pending", "failed", "refunded"]
+
+      - name: currency
+        description: "The currency in which the payment was made"
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ["USD", "EUR", "INR", "JPY", "CAD"]
+
+  - name: stg_merchants
+    description: "Staging model for merchants: cleaned columns from raw_merchants"
+    columns:
+      - name: merchant_id
+        description: "Primary key for the staging model"
+        data_tests:
+          - not_null
+          - unique
+
+      - name: merchant_name
+        description: "The name of the merchant"
+        data_tests:
+          - not_null

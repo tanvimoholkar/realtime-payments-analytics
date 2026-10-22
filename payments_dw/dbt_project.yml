@@ -36,6 +36,6 @@ models:
       +materialized: table
 seeds:
   payments_dw:
-    aw_payments:
+    raw_payments:
       +column_types:
         created_at: timestamp

@@ -1,0 +1,9 @@
+version: 2
+
+models:
+  - name: fct_payments
+    columns:
+      - name: payment_id
+        data_tests:
+          - unique
+          - not_null
