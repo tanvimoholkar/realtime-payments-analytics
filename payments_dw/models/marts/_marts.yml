@@ -7,3 +7,15 @@ models:
         data_tests:
           - unique
           - not_null
+  - name: merchant_payment_summary
+    description: "One row per merchant with payment counts and amounts. Amounts are in each merchant's local currency, so don't sum across merchants."
+    columns:
+      - name: merchant_id
+        description: "Primary key: one row per merchant"
+        data_tests:
+          - unique
+          - not_null
+      - name: total_amount
+        description: "Sum of all payments in the merchant's local currency, regardless of status"
+      - name: completed_amount
+        description: "Sum of completed payments only, in the merchant's local currency"
